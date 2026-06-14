@@ -65,11 +65,16 @@ try {
   const config = {
     version: 3,
     routes: [
-      { src: "^/bo/(.*)", dest: "/bo/index.html" },
-      { src: "^/socio/(.*)", dest: "/socio/index.html" },
-      { src: "^/kiosk/(.*)", dest: "/kiosk/index.html" },
-      { src: "^/((?!bo|socio|kiosk|assets).*)", dest: "/index.html" },
-      { src: "/(.+)", dest: "/static/$1" },
+      // Assets (static files)
+      { src: "^/assets/(.*)", dest: "/static/assets/$1" },
+      { src: "^/bo/assets/(.*)", dest: "/static/bo/assets/$1" },
+      { src: "^/socio/assets/(.*)", dest: "/static/socio/assets/$1" },
+      { src: "^/kiosk/assets/(.*)", dest: "/static/kiosk/assets/$1" },
+      // SPA fallbacks
+      { src: "^/bo/(.*)", dest: "/static/bo/index.html" },
+      { src: "^/socio/(.*)", dest: "/static/socio/index.html" },
+      { src: "^/kiosk/(.*)", dest: "/static/kiosk/index.html" },
+      { src: "^/(.*)", dest: "/static/index.html" },
     ],
   };
   fs.writeFileSync(path.join(path.dirname(outDir), "config.json"), JSON.stringify(config, null, 2));
