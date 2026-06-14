@@ -1,0 +1,14 @@
+version: "2"
+tunnels:
+  met-web:
+    proto: http
+    addr: 5176
+  met-socio:
+    proto: http
+    addr: 5173
+  met-backoffice:
+    proto: http
+    addr: 5174
+  met-kiosk:
+    proto: http
+    addr: 5175

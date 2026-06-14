@@ -1,0 +1,29 @@
+{
+  "name": "met-system",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MET — Sistema de gestión para cadena de gimnasios (monolito modular)",
+  "packageManager": "pnpm@10.33.2",
+  "scripts": {
+    "setup": "pnpm install && pnpm db:reset",
+    "db:reset": "pnpm --filter @met/api db:reset",
+    "db:seed": "pnpm --filter @met/api seed",
+    "dev": "concurrently -n api,socio,backoffice,kiosk,web -c magenta,cyan,green,yellow,blue \"pnpm dev:api\" \"pnpm dev:socio\" \"pnpm dev:backoffice\" \"pnpm dev:kiosk\" \"pnpm dev:web\"",
+    "dev:api": "pnpm --filter @met/api dev",
+    "dev:socio": "pnpm --filter @met/socio dev",
+    "dev:backoffice": "pnpm --filter @met/backoffice dev",
+    "dev:kiosk": "pnpm --filter @met/kiosk dev",
+    "dev:web": "pnpm --filter @met/web dev",
+    "build": "pnpm --filter @met/web build && pnpm --filter @met/socio build -- --base=/socio/ && pnpm --filter @met/backoffice build -- --base=/bo/ && pnpm --filter @met/kiosk build -- --base=/kiosk/",
+    "build:vercel": "node scripts/build-vercel.js",
+    "serve:vercel": "node scripts/serve-vercel-locally.js",
+    "typecheck": "pnpm -r typecheck"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0",
+    "typescript": "^5.6.3"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["better-sqlite3", "esbuild"]
+  }
+}

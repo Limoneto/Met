@@ -1,0 +1,8 @@
+apps/api
+ngrok-tunnels.yml
+gateway.mjs
+Dockerfile
+railway.json
+.env*
+.git
+.DS_Store
