@@ -61,26 +61,7 @@ try {
     });
   }
 
-  // Genera config.json que Vercel necesita
-  const config = {
-    version: 3,
-    routes: [
-      // Assets (static files)
-      { src: "^/assets/(.*)", dest: "/static/assets/$1" },
-      { src: "^/bo/assets/(.*)", dest: "/static/bo/assets/$1" },
-      { src: "^/socio/assets/(.*)", dest: "/static/socio/assets/$1" },
-      { src: "^/kiosk/assets/(.*)", dest: "/static/kiosk/assets/$1" },
-      // SPA fallbacks
-      { src: "^/bo/(.*)", dest: "/static/bo/index.html" },
-      { src: "^/socio/(.*)", dest: "/static/socio/index.html" },
-      { src: "^/kiosk/(.*)", dest: "/static/kiosk/index.html" },
-      { src: "^/(.*)", dest: "/static/index.html" },
-    ],
-  };
-  fs.writeFileSync(path.join(path.dirname(outDir), "config.json"), JSON.stringify(config, null, 2));
-
   console.log("✅ Vercel output ready at .vercel/output/static");
-  console.log("✅ Generated .vercel/output/config.json");
 } catch (e) {
   console.error("❌ Build failed:", e.message);
   process.exit(1);
