@@ -61,7 +61,17 @@ try {
     });
   }
 
+  // Genera _redirects para SPA fallback (Vercel)
+  const redirects = `# SPA fallbacks
+/bo/*  /bo/index.html  200
+/socio/*  /socio/index.html  200
+/kiosk/*  /kiosk/index.html  200
+/*  /index.html  200
+`;
+  fs.writeFileSync(path.join(outDir, "_redirects"), redirects);
+
   console.log("✅ Vercel output ready at .vercel/output/static");
+  console.log("✅ Generated _redirects file");
 } catch (e) {
   console.error("❌ Build failed:", e.message);
   process.exit(1);
