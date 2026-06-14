@@ -3,9 +3,9 @@
   "outputDirectory": ".vercel/output/static",
   "installCommand": "pnpm install --frozen-lockfile",
   "rewrites": [
-    { "source": "/bo/(.*)", "destination": "/bo/index.html" },
-    { "source": "/socio/(.*)", "destination": "/socio/index.html" },
-    { "source": "/kiosk/(.*)", "destination": "/kiosk/index.html" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/bo/([^.]+)/?$", "destination": "/bo/index.html" },
+    { "source": "/socio/([^.]+)/?$", "destination": "/socio/index.html" },
+    { "source": "/kiosk/([^.]+)/?$", "destination": "/kiosk/index.html" },
+    { "source": "/([^.]+)/?$", "destination": "/index.html" }
   ]
 }
