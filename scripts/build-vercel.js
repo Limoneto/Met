@@ -61,7 +61,21 @@ try {
     });
   }
 
+  // Genera config.json que Vercel necesita
+  const config = {
+    version: 3,
+    routes: [
+      { src: "^/bo/(.*)", dest: "/bo/index.html" },
+      { src: "^/socio/(.*)", dest: "/socio/index.html" },
+      { src: "^/kiosk/(.*)", dest: "/kiosk/index.html" },
+      { src: "^/((?!bo|socio|kiosk|assets).*)", dest: "/index.html" },
+      { src: "/(.+)", dest: "/static/$1" },
+    ],
+  };
+  fs.writeFileSync(path.join(path.dirname(outDir), "config.json"), JSON.stringify(config, null, 2));
+
   console.log("✅ Vercel output ready at .vercel/output/static");
+  console.log("✅ Generated .vercel/output/config.json");
 } catch (e) {
   console.error("❌ Build failed:", e.message);
   process.exit(1);
