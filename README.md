@@ -174,20 +174,21 @@ La app del socio es instalable (manifest + service worker). En el celu, mismo Wi
 entrá a `http://<IP-de-tu-PC>:5173` y en Chrome tocá **⋮ → Agregar a pantalla de
 inicio**. El carnet QR queda accesible incluso sin conexión.
 
-## 🚀 Deploy (Vercel + Railway, 5 minutos)
+## 🚀 Deploy (Vercel + Railway, 3 pasos, 10 min)
 
-**Vercel** (frontends) + **Railway** (API + PostgreSQL) — ambos con tier gratuito.
+Git repo local listo. Ahora:
 
 ```bash
-# Localmente, testea antes:
+# 1. Testea localmente (antes de subir)
 pnpm build:vercel && pnpm serve:vercel    # http://localhost:3000
+
+# 2. Push a GitHub
+git push -u origin main
+
+# 3. Railway + Vercel (ver DEPLOY_STEPS.md para detalles)
 ```
 
-**En production:**
-1. Railway: conecta GitHub repo → auto-build API + PostgreSQL ✓
-2. Vercel: conecta repo → **Build**: `pnpm build:vercel` → env var `VITE_API_URL=...` ✓
-
-Ver [`VERCEL_DEPLOYMENT.md`](./VERCEL_DEPLOYMENT.md) para pasos copy-paste (sin omitir nada).
+**Instrucciones paso-a-paso:** Ver [`DEPLOY_STEPS.md`](./DEPLOY_STEPS.md) (3 pasos, copy-paste ready)
 
 ---
 
