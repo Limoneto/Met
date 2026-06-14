@@ -11,11 +11,8 @@ COPY tsconfig.base.json ./
 # Install pnpm
 RUN npm install -g pnpm@10.33.2
 
-# Install dependencies (cacheable layer)
+# Install dependencies
 RUN pnpm install --frozen-lockfile --filter @met/api...
-
-# Build (API + dependencies)
-RUN pnpm --filter @met/api build
 
 # Expose tRPC port
 EXPOSE 4000
