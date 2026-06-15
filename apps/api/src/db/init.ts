@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { sqlite } from "./index.js";
+import { hashPassword } from "../auth.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -92,10 +93,11 @@ function seedDemoData() {
   // Users & Employees
   const userAdmin = uid();
   const empAdmin = uid();
+  const adminHash = hashPassword("admin123");
 
   sqlite.exec(`
     INSERT INTO usuario (id, email, rol_id, password_hash, activo) VALUES
-      ('${userAdmin}', 'admin@met.com', '${roleAdmin}', '$2b$10$xyz', 1);
+      ('${userAdmin}', 'admin@met.com', '${roleAdmin}', '${adminHash}', 1);
 
     INSERT INTO empleado (id, usuario_id, puesto_id, sede_id, nombre, documento, estado, ingreso) VALUES
       ('${empAdmin}', '${userAdmin}', 'puesto-gerente', 'sede-centro', 'Admin User', '12345678', 'activo', '2024-01-01');
@@ -104,10 +106,11 @@ function seedDemoData() {
   // Demo member
   const userSocio = uid();
   const socio = uid();
+  const demoHash = hashPassword("demo123");
 
   sqlite.exec(`
     INSERT INTO usuario (id, email, rol_id, password_hash, activo) VALUES
-      ('${userSocio}', 'demo@met.com', '${roleCliente}', '$2b$10$xyz', 1);
+      ('${userSocio}', 'demo@met.com', '${roleCliente}', '${demoHash}', 1);
 
     INSERT INTO socio (id, usuario_id, sede_id, nombre, documento, alta) VALUES
       ('${socio}', '${userSocio}', 'sede-centro', 'Demo Member', '87654321', '2024-01-01');
