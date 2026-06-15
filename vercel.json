@@ -1,9 +1,7 @@
 {
-  "buildCommand": "pnpm build:vercel",
-  "outputDirectory": ".vercel/output/static",
   "installCommand": "pnpm install --frozen-lockfile",
-  "cleanUrls": true,
-  "trailingSlash": false,
+  "buildCommand": "pnpm --filter @met/web build && pnpm --filter @met/socio build -- --base=/socio/ && pnpm --filter @met/backoffice build -- --base=/bo/ && pnpm --filter @met/kiosk build -- --base=/kiosk/ && mkdir -p public/socio public/bo public/kiosk && cp -r apps/web/dist/* public/ && cp -r apps/socio/dist/* public/socio/ && cp -r apps/backoffice/dist/* public/bo/ && cp -r apps/kiosk/dist/* public/kiosk/",
+  "outputDirectory": "public",
   "rewrites": [
     { "source": "/bo(/.*)?" , "destination": "/bo/index.html" },
     { "source": "/socio(/.*)?" , "destination": "/socio/index.html" },
