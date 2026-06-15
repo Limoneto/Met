@@ -4,7 +4,7 @@ const path = require('path');
 const { execSync } = require('child_process');
 
 const root = process.cwd();
-const publicDir = path.join(root, 'public');
+const publicDir = path.join(root, '.vercel/output/static');
 
 console.log(`📍 Working directory: ${root}`);
 

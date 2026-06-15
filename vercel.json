@@ -1,6 +1,5 @@
 {
   "buildCommand": "pnpm -w run build:vercel",
-  "outputDirectory": "public",
   "rewrites": [
     { "source": "/bo(/.*)?" , "destination": "/bo/index.html" },
     { "source": "/socio(/.*)?" , "destination": "/socio/index.html" },
