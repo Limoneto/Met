@@ -2,7 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const root = __dirname + '/..';
+const root = process.cwd(); // Use current working directory (PWD will be repo root in Vercel)
 
 // Recursive copy function
 function copyDir(src, dest) {
