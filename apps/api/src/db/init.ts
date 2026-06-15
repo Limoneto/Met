@@ -76,15 +76,10 @@ function seedDemoData() {
       ('sede-norte', 'Sede Banda Norte', 'Bv. Roca 1450, Río Cuarto, Córdoba', 1);
   `);
 
-  // Activities
+  // Activities (minimal demo)
   sqlite.exec(`
     INSERT INTO actividad (id, sede_id, slug, nombre, color) VALUES
-      ('act-yoga', 'sede-centro', 'yoga', 'Yoga', '#4ECDC4'),
-      ('act-pilates', 'sede-centro', 'pilates', 'Pilates', '#FF6B6B'),
-      ('act-crossfit', 'sede-centro', 'crossfit', 'CrossFit', '#FFE66D'),
-      ('act-zumba', 'sede-centro', 'zumba', 'Zumba', '#95E1D3'),
-      ('act-natacion', 'sede-centro', 'natacion', 'Natación', '#6BCB77'),
-      ('act-musculacion', 'sede-centro', 'musculacion', 'Musculación', '#FF6B35');
+      ('act-yoga', 'sede-centro', 'yoga', 'Yoga', '#4ECDC4');
   `);
 
   // Puestos
@@ -120,33 +115,18 @@ function seedDemoData() {
       ('${socio}', '${userSocio}', 'sede-centro', 'Demo Member', '87654321', '2024-01-01');
   `);
 
-  // Plans
-  const planIlimitado = uid();
-  const plan10cls = uid();
-  const plan5cls = uid();
+  // Plans (you can create more from the BO)
+  const planDemo = uid();
 
   sqlite.exec(`
-    INSERT INTO plan (id, sede_id, nombre, tipo, precio, clases_incluidas, vigencia_dias, max_dias_pausa, activo) VALUES
-      ('${planIlimitado}', 'sede-centro', 'Plan Ilimitado', 'ilimitado', 50000, NULL, 30, 30, 1),
-      ('${plan10cls}', 'sede-centro', '10 Clases', 'pack', 20000, 10, 60, 30, 1),
-      ('${plan5cls}', 'sede-centro', '5 Clases', 'pack', 12000, 5, 60, 30, 1);
+    INSERT INTO plan (id, sede_id, nombre, tipo, precio, vigencia_dias, max_dias_pausa, activo) VALUES
+      ('${planDemo}', 'sede-centro', 'Plan Demo', 'ilimitado', 50000, 30, 30, 1);
 
     INSERT INTO plan_actividad (plan_id, actividad_id) VALUES
-      ('${planIlimitado}', 'act-yoga'),
-      ('${planIlimitado}', 'act-pilates'),
-      ('${planIlimitado}', 'act-crossfit'),
-      ('${planIlimitado}', 'act-zumba'),
-      ('${planIlimitado}', 'act-natacion'),
-      ('${planIlimitado}', 'act-musculacion'),
-      ('${plan10cls}', 'act-yoga'),
-      ('${plan10cls}', 'act-pilates'),
-      ('${plan5cls}', 'act-yoga');
-  `);
+      ('${planDemo}', 'act-yoga');
 
-  // Suscripcion
-  sqlite.exec(`
-    INSERT INTO suscripcion (id, socio_id, plan_id, estado, alta, clases_restantes, vence) VALUES
-      ('${uid()}', '${socio}', '${planIlimitado}', 'activa', '2024-01-15', NULL, '2025-01-15');
+    INSERT INTO suscripcion (id, socio_id, plan_id, estado, alta, vence) VALUES
+      ('${uid()}', '${socio}', '${planDemo}', 'activa', '2024-01-15', '2025-01-15');
   `);
 
   // Policies
