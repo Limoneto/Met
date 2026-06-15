@@ -2,7 +2,7 @@
 import { drizzle } from "drizzle-orm/better-sqlite3";
 import { drizzle as drizzleMysql } from "drizzle-orm/mysql2";
 import Database from "better-sqlite3";
-import { createPool } from "mysql2/promise";
+import mysql from "mysql2";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { schema } from "./schema.js";
@@ -14,9 +14,14 @@ export let sqlite: any;
 
 if (process.env.DATABASE_URL) {
   // MySQL via Railway
-  const pool = createPool(process.env.DATABASE_URL);
-  db = drizzleMysql(pool, { schema, mode: "default" });
-  console.log("📊 Connected to MySQL");
+  try {
+    const pool = mysql.createPool(process.env.DATABASE_URL);
+    db = drizzleMysql(pool, { schema });
+    console.log("📊 Connected to MySQL");
+  } catch (e) {
+    console.error("❌ MySQL connection failed:", (e as Error).message);
+    process.exit(1);
+  }
 } else {
   // SQLite local (dev)
   const DB_PATH = process.env.MET_DB ?? path.resolve(__dirname, "../../met.db");
