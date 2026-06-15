@@ -1,6 +1,7 @@
 {
   "buildCommand": "pnpm -w run build:vercel",
   "rewrites": [
+    { "source": "/__api/(.*)", "destination": "https://metapi-production-fa03.up.railway.app/$1" },
     { "source": "/bo(/.*)?" , "destination": "/bo/index.html" },
     { "source": "/socio(/.*)?" , "destination": "/socio/index.html" },
     { "source": "/kiosk(/.*)?" , "destination": "/kiosk/index.html" },
