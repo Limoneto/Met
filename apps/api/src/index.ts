@@ -3,6 +3,7 @@ import { createHTTPServer } from "@trpc/server/adapters/standalone";
 import { startScheduler } from "./jobs.js";
 import { appRouter } from "./router.js";
 import { createContext } from "./trpc.js";
+import { initializeSchema } from "./db/init.js";
 
 const PORT = Number(process.env.PORT ?? 4000);
 
@@ -37,6 +38,9 @@ const server = createHTTPServer({
 
 server.listen(PORT);
 console.log(`✓ MET API escuchando en http://localhost:${PORT}`);
+
+// Initialize schema if needed
+initializeSchema();
 
 // Workers in-process (cuotas, ocurrencias, dunning, AFIP, outbox).
 if (process.env.MET_NO_JOBS !== "1") startScheduler(15);
