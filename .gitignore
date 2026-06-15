@@ -6,3 +6,4 @@ apps/api/met.db
 apps/api/met.db-*
 .env
 .env.local
+.vercel/

@@ -1,5 +1,0 @@
-# SPA fallbacks
-/bo/*  /static/bo/index.html  200
-/socio/*  /static/socio/index.html  200
-/kiosk/*  /static/kiosk/index.html  200
-/*  /static/index.html  200
