@@ -15,7 +15,7 @@
     "dev:kiosk": "pnpm --filter @met/kiosk dev",
     "dev:web": "pnpm --filter @met/web dev",
     "build": "pnpm --filter @met/web build && pnpm --filter @met/socio build -- --base=/socio/ && pnpm --filter @met/backoffice build -- --base=/bo/ && pnpm --filter @met/kiosk build -- --base=/kiosk/",
-    "build:vercel": "pnpm build && mkdir -p public && cp -r apps/web/dist/* public/ && cp -r apps/socio/dist public/socio && cp -r apps/backoffice/dist public/bo && cp -r apps/kiosk/dist public/kiosk",
+    "build:vercel": "node scripts/build-for-vercel.js",
     "serve:vercel": "node scripts/serve-vercel-locally.js",
     "typecheck": "pnpm -r typecheck"
   },
