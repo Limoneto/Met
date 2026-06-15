@@ -61,17 +61,7 @@ try {
     });
   }
 
-  // Genera _redirects en la raíz de .vercel/output (no en static)
-  const redirects = `# SPA fallbacks
-/bo/*  /static/bo/index.html  200
-/socio/*  /static/socio/index.html  200
-/kiosk/*  /static/kiosk/index.html  200
-/*  /static/index.html  200
-`;
-  fs.writeFileSync(path.join(path.dirname(outDir), "_redirects"), redirects);
-
   console.log("✅ Vercel output ready at .vercel/output/static");
-  console.log("✅ Generated .vercel/output/_redirects");
 } catch (e) {
   console.error("❌ Build failed:", e.message);
   process.exit(1);
